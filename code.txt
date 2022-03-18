@@ -1,23 +1,23 @@
 
 # Prompt
 function prompt() {
-	RED="\[\e[1;31m\]"
-	GREEN="\[\e[1;32m\]"
-	CYAN="\[\e[1;36m\]"
-	RESET="\[\e[m\]"
+	local red="\[\e[1;31m\]"
+	local green="\[\e[1;32m\]"
+	local cyan="\[\e[1;36m\]"
+	local reset="\[\e[m\]"
 	if [[ -z $VIRTUAL_ENV ]]
 	then
-		VENV=""
+		local venv=""
 	else
-		VENV_NAME=$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')
-		VENV="$GREEN($VENV_NAME)$RESET "
+		local venv_name=$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')
+		local venv="$green($venv_name)$reset "
 	fi
 	if [[ $? -eq 0 ]]
 	then
-		ERRCOLOR=$GREEN
+		local error_color=$green
 	else
-		ERRCOLOR=$RED
+		local error_color=$red
 	fi
-	PS1=" $VENV$CYAN\w$RESET\n $ERRCOLOR❱$RESET "
+	PS1=" $venv$cyan\w$reset\n $error_color$reset "
 }
 PROMPT_COMMAND=prompt
