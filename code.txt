@@ -1,0 +1,23 @@
+
+# Prompt
+function prompt() {
+	RED="\[\e[1;31m\]"
+	GREEN="\[\e[1;32m\]"
+	CYAN="\[\e[1;36m\]"
+	RESET="\[\e[m\]"
+	if [[ -z $VIRTUAL_ENV ]]
+	then
+		VENV=""
+	else
+		VENV_NAME=$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')
+		VENV="$GREEN($VENV_NAME)$RESET "
+	fi
+	if [[ $? -eq 0 ]]
+	then
+		ERRCOLOR=$GREEN
+	else
+		ERRCOLOR=$RED
+	fi
+	PS1=" $VENV$CYAN\w$RESET\n $ERRCOLOR❱$RESET "
+}
+PROMPT_COMMAND=prompt
