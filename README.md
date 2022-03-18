@@ -2,7 +2,7 @@
 
 Super clean and simple bash prompt.
 
-# Install
+## Install
 
 First, open a terminal window. Then paste this command. After reloading your terminal, your prompt should be updated.
 
@@ -10,4 +10,4 @@ First, open a terminal window. Then paste this command. After reloading your ter
 curl -sSL 'https://raw.githubusercontent.com/anatolethien/bare-prompt/master/install.sh' | bash
 ```
 
-You can also copy the content of the `code.txt` file and append it to your `.bashrc` file.
+You can also copy the content of the `prompt.sh` file and append it to your `.bashrc` file.
