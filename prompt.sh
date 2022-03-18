@@ -4,13 +4,14 @@ function prompt() {
 	local status=$?
 	local red="\[\e[1;31m\]"
 	local green="\[\e[1;32m\]"
+	local yellow="\[\e[1;33m\]"
 	local cyan="\[\e[1;36m\]"
 	local reset="\[\e[m\]"
 	if [ -z $VIRTUAL_ENV ]
 	then
 		local venv=""
 	else
-		local venv_name=$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')
+		local venv_name="$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')"
 		local venv="$green($venv_name)$reset "
 	fi
 	if [ $status -eq 0 ]
@@ -19,6 +20,13 @@ function prompt() {
 	else
 		local status_color=$red
 	fi
-	PS1=" $venv$cyan\w$reset\n $status_color❱$reset "
+	if [ $(git rev-parse --is-inside-work-tree 2> /dev/null) ]
+	then
+		local branch_name=$(git branch 2> /dev/null | grep "*" | awk '{print $NF}')
+		local branch=" $yellow[$branch_name]$reset"
+	else
+		local branch=""
+	fi
+	PS1=" $venv$cyan\w$reset$branch\n $status_color❱$reset "
 }
 PROMPT_COMMAND=prompt
