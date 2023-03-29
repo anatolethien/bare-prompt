@@ -1,6 +1,12 @@
 
 # Prompt
 function prompt() {
+  os=$(uname -s)
+  if [[ "$os" == *"MINGW64"* ]]; then
+    local sep="\\"
+  else
+    local sep="/"
+  fi
   local status=$?
   local red="\[\e[1;31m\]"
   local green="\[\e[1;32m\]"
@@ -10,7 +16,7 @@ function prompt() {
   if [ -z $VIRTUAL_ENV ]; then
     local venv=""
   else
-    local venv_name="$(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')"
+    local venv_name="$(echo $VIRTUAL_ENV | awk -F "$sep" '{print $NF}')"
     local venv="$green($venv_name)$reset "
   fi
   if [ $status -eq 0 ]; then
