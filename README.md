@@ -17,7 +17,9 @@ This command will install the default theme, `main`.
 There are a few themes available!
 
 - `main`
+- `main-one`
 - `classic`
+- `classic-one`
 
 Install a specific theme with the following command. This one will install the `classic` theme.
 
